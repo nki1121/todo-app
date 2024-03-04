@@ -18,6 +18,13 @@ class Todo extends Component {
         });
     }
 
+    addTodo = () => {
+        const { todos, name } = this.state;
+        this.setState({
+            todos: [...todos, name]
+        });
+    }
+
     /* UIを描画するために使用されるメソッド */
     render() {
         const { todos } = this.state;
@@ -25,7 +32,7 @@ class Todo extends Component {
         return (
             <div> {/* 要素やコンテンツをまとめる */}
                 <input type="text" onInput={this.onInput} />
-                <button>登録</button>
+                <button onClick={this.addTodo} >登録</button>
                 <ul> {/* リストを定義する */}
                     {/* 'todos'配列内の各要素をループして、リスト形式で表示する */}
                     {todos.map((todo, index) => <li key={index}>{todo}</li>)}
