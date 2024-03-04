@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Todo extends Component {
+export default class Todo extends Component {
 
     /* stateの初期化 */
     constructor(props) { // クラス内で"最初"に呼び出されるメソッド
@@ -25,6 +25,13 @@ class Todo extends Component {
         });
     }
 
+    removeTodo = (index) => {
+        const { todos, name } = this.state;
+        this.setState({
+            todos: [...todos.slice(0, index), ...todos.slice(index + 1)]
+        });
+    }
+
     /* UIを描画するために使用されるメソッド */
     render() {
         const { todos } = this.state;
@@ -35,7 +42,10 @@ class Todo extends Component {
                 <button onClick={this.addTodo} >登録</button>
                 <ul> {/* リストを定義する */}
                     {/* 'todos'配列内の各要素をループして、リスト形式で表示する */}
-                    {todos.map((todo, index) => <li key={index}>{todo}</li>)}
+                    {todos.map((todo, index) => <li key={index}>
+                        {todo}
+                        <button onClick={ () => {this.removeTodo(index)}}>削除</button>
+                    </li>)}
                 </ul>
             </div>
         );
